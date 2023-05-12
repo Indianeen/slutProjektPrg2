@@ -1,5 +1,3 @@
-package com.company;
-
 import javax.swing.*;
 import java.sql.*;
 
@@ -9,13 +7,16 @@ public class Database {
         Connection conn = null;
         String user = "test";
         JPasswordField passwordField = new JPasswordField();
-        JOptionPane.showConfirmDialog(null, passwordField, "password?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(null, passwordField, "password?", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
         String password = new String(passwordField.getPassword());
 
         try {
 
-            conn = DriverManager.getConnection();
-
+            conn = DriverManager.getConnection("jdbc:mysql://" + DatabaseLoginData.DBURL + ":" +
+                DatabaseLoginData.port + "/" + DatabaseLoginData.DBname +
+                "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                DatabaseLoginData.user, DatabaseLoginData.password);
 
         } catch (SQLException e) {
             e.printStackTrace();
